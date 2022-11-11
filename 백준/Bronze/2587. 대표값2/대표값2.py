@@ -1,6 +1,8 @@
-x = []
-for i in range(5):
-    x.append(int(input()))
-x.sort()
-print(int(sum(x)/5))
-print(x[2])
+numlist = []
+for _ in range(5):
+    numlist.append(int(input()))
+#   numlist.append(int(sys.stdin.readline()))
+
+numlist.sort()
+print(int(sum(numlist)/len(numlist)))
+print(numlist[2])
