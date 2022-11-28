@@ -1,0 +1,7 @@
+A,B = map(int, input().split())
+setA = set(map(int,input().split()))
+setB = set(map(int,input().split()))
+answer = set()
+answer.update(setA.difference(setB))
+answer.update(setB.difference(setA))
+print(len(answer))
