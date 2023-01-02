@@ -1,11 +1,12 @@
 #include <iostream>
-using namespace std;
 
 int main(){
     int T, A, B;
-    cin >> T;
-    for (int i=1; i<T+1; i++){
-        cin >> A >> B;
-        cout << "Case #" << i << ": " << A+B << '\n';
+    std::cin >> T;
+
+    for(int i=1; i<T+1; i++){
+        std::cin >> A >> B;
+        std::cout << "Case #" << i << ": " << A+B << '\n';
     }
+
 }
