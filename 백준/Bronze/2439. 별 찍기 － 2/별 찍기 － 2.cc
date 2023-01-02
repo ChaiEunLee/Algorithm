@@ -1,10 +1,10 @@
-#include <iostream>
-using namespace std;
+#include <iostream> 
 
 int main(){
     int N;
-    cin >> N;
-    for (int i=1;i<N+1;i++){
-        cout << string (N-i, ' ') << string(i, '*') << '\n';
+    std::cin >> N;
+
+    for(int i=1; i<N+1;i++){
+        std::cout << std::string(N-i,' ') << std::string(i,'*') <<'\n';
     }
 }
