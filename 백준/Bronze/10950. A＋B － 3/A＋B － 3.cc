@@ -1,12 +1,12 @@
 #include <iostream>
-using namespace std;
 
 int main(){
     int T;
-    cin >> T;
-    int A,B;
-    for (int i=0; i<T; i++){
-        cin >> A >> B;
-        cout << A+B << endl;
+    std::cin >> T;
+
+    for(int i =0; i<T;i++){
+        int A,B;
+        std::cin >> A >> B;
+        std::cout << A+B << '\n';
     }
 }
