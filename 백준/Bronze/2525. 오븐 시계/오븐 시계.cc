@@ -1,21 +1,16 @@
 #include <iostream>
 
 int main(){
-    int A, B, C;
-    std::cin >> A >> B;
-    std::cin >> C;
+    int H, M, time, newM, newH;
+    std::cin >> H >> M;
+    std::cin >> time;
+    
+    newM = (M+time)%60;
+    newH = H + (M+time)/60; //int라서 이렇게만해도 될듯.
 
-    if (B+C < 60){
-        B = B+C;
+    if (newH >= 24){
+        newH = newH - 24;
     }
-    else if (A + ((B+C)/60) < 24){
-        A = A + ((B+C)/60);
-        B = (B+C)%60;
-    }
-    else if (A+(B+C)/60 >= 24){
-        A = A + ((B+C)/60) -24;
-        B = (B+C)%60;
-    }
-    std::cout << A << ' ' << B;
+
+    std::cout << newH << ' ' << newM;
 }
-
