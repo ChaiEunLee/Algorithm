@@ -1,15 +1,20 @@
 #include <iostream>
 
 int main(){
-    int inputScore;
-    char score;
-    std::cin >> inputScore;
+    int score;
+    std::cin >> score;
 
-    if (inputScore >= 90){        score = 'A';    }
-    else if (inputScore >= 80)    {        score = 'B';    }
-    else if (inputScore >= 70)    {        score = 'C';    }
-    else if (inputScore >= 60)    {        score = 'D';    }
-    else {        score = 'F';    }
-    
-    std::cout << score;
+    if (score >= 90){
+        std::cout << 'A';
+    }
+    else if (score >= 80){
+        std::cout << 'B';
+    }
+    else if (score >= 70){
+        std::cout << 'C';
+    }
+    else if (score >= 60){
+        std::cout << 'D';
+    }
+    else {std::cout << 'F';}
 }
