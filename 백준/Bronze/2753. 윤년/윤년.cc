@@ -2,20 +2,12 @@
 
 int main(){
     int year;
-    bool yearYN;
     std::cin >> year;
 
-    if (year%400 == 0){
-        yearYN = true;
-    }
-    else if (year%100 == 0){
-        yearYN = false;
-    }
-    else if (year%4 == 0){
-        yearYN = true;
-    }
-    else{
-        yearYN = false;
-    }
-    std::cout << yearYN;
+    if (year%4 == 0){
+        if (year%100 != 0 || year%400 == 0){
+            std::cout << 1;
+        }
+        else { std::cout << 0;}
+    } else {std::cout << 0;}
 }
