@@ -2,21 +2,16 @@
 using namespace std;
 
 int main(){
-    int newNum;
-    int maxVal = 0;
-    int order = 0;
-    int myArray[9];
+    int input;
+    int intmax=0;
+    int intmaxid;
 
-    for(int i=0;i<9;i++){
-        cin >> newNum;
-        myArray[i] = newNum;
-        if (newNum > maxVal){
-            maxVal = newNum;
+    for (int i=0; i < 9; i++){
+        cin >> input;
+        if (intmax < input){
+            intmax = input;
+            intmaxid = i+1;
         }
-   }
-   for(int i=0;i<9;i++){
-    if(myArray[i]==maxVal){
-        cout << maxVal << '\n' << i+1;
     }
-   }
+    cout << intmax << '\n' << intmaxid;
 }
