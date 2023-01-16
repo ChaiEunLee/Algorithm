@@ -1,7 +1,10 @@
 import sys
-n = int(input())
-l = []
-for i in range(n):
-    l.append(int(sys.stdin.readline()))
-for i in sorted(l):
-    sys.stdout.write(str(i)+'\n')
+N = int(sys.stdin.readline())
+
+numlist = []
+for i in range(N):
+    numlist.append(int(sys.stdin.readline()))
+
+numlist.sort()
+for j in range(N):
+    print(numlist[j])
