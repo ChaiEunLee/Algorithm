@@ -1,16 +1,17 @@
-#1. 행렬 덧셈
-N, M = map(int, input().split())
-matrix = [[0]*M for i in range(N)]
-for i in range(N):
-    matrix[i] = list(map(int, input().split()))
-A = matrix
+N,M = map(int,input().split())
 
-matrix = [[0]*M for i in range(N)]       
+alist = [[0]*M for i in range(N)]
 for i in range(N):
-    matrix[i] = list(map(int, input().split()))
-B = matrix
+    alist[i] = list(map(int, input().split()))
+    
+A = alist
 
-for i in range(N):
-    for j in range(M):
-        print(A[i][j]+B[i][j], end = ' ')
+blist = [[0]*M for i in range(N)]
+for j in range(N):
+    blist[j] = list(map(int, input().split()))
+B = blist
+
+for n in range(N):
+    for m in range(M):
+            print(alist[n][m]+blist[n][m], end=' ')
     print()
