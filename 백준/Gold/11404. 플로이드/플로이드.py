@@ -1,11 +1,13 @@
-n = int(input())
-m = int(input())
+import sys
+
+n = int(sys.stdin.readline())
+m = int(sys.stdin.readline())
 
 INF = 1e9
 graph = [[INF]*(n+1) for _ in range(n+1)]
 
 for _ in range(m):
-    a,b,c = map(int, input().split())
+    a,b,c = map(int, sys.stdin.readline().split())
     if graph[a][b] > c:
         graph[a][b] = c
         
