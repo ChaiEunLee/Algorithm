@@ -8,13 +8,8 @@ def solution(park, routes):
             for j in range(len(parks[i])):
                 if parks[i][j] == 'S':
                     x,y = i,j
-        if 'X' in list(park[i]):
-            for j in range(len(parks[i])):
-                if parks[i][j] == 'X':
-                    obstacles.append([i,j])
-    #print(x,y)
-    # E
-    # 동남서북이라서 +1, 거꾸로 가려면 -1
+
+    # 동남서북이라서 +1,
     dx = [0,1,0,-1]
     dy = [1,0,-1,0]
     for tmp in routes:
