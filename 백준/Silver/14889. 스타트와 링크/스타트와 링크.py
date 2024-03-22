@@ -4,10 +4,16 @@ S = []
 for _ in range(N):
     S.append(list(map(int, input().split())))
 
+import math
 all = set(range(N))
 done = 0
 minval = 100*10
+
 for tmp in combinations(range(N),N//2):
+    cnt = math.comb(N,N//2)//2+1
+    if done==cnt:
+        break
+    done += 1
     first = set(tmp)  
     second = all-first
     #print(first, second, done)
