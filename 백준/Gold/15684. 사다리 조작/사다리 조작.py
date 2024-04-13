@@ -1,3 +1,5 @@
+# https://yeon-code.tistory.com/82
+# ㅍ아ㅣ썬 
 # 15684. 사다리 조작
 N,M,H = map(int,input().split())
 
