@@ -1,55 +1,63 @@
-def down(): #사다리 조건 확인 함수
-    for i in range(N):
-        s = i
-        j = 0
-        while j < H:
-            if ladder[j][s]:
-                s += 1
-                j += 1
-            elif s > 0 and ladder[j][s-1]:
-                s -= 1
-                j += 1
-            else:
-                j += 1
-        if s == i:
-            continue
-        else:
-            return False
+def is_complete(i):
+    x, y = 0, i
+    while x < height:
+        if y - 1 >= 0 and ladders[x][y - 1]:
+            y = y - 1
+        elif y < line_cnt - 1 and ladders[x][y]:
+            y = y + 1
+        x += 1
+    if y != i:
+        return False
     return True
 
 
-def dfs(chance, x, y):
-    global min_val
-    global ladder
-    if min_val != -1: #이미 답 나왔을경우 더이상의 탐색 의미 없음
+def backtracking(x, y, depth):
+    global answer
+    # 탈출 전에 지금 조건에서 사다리여부 체크
+    if depth >= answer:  # 정답이 될 가능성 없음
         return
-    if chance == 0: #더이상 넣을 수 있는 기회가 없을 경우
-        if down(): #사다리 내리는 함수 진행후 만약 모든 i 번째 세로줄의 결승점이 i번째 일 경우
-            min_val = cnt #min_val 값 cnt 로 고쳐준 후 함수 리턴
+
+    non_correct = 0
+    for i in range(line_cnt):
+        if not is_complete(i):
+            non_correct += 1
+    if non_correct > ((answer - 1 - depth) * 2):
+        # 하나의 사다리는 2개의 결과를 바꿀 수 있다.
+        # 지금이 유망하려면 정답보다 적은 개수로 사다리를 완성시켜야 하는데
+        # 안맞는 사다리가 (정답-1)*2개 보다 많다면 가지치기
         return
-    for dx in range(x, H):
-        for dy in range(N-1):
-            if dx == x and dy <= y: #이전에 탐색 완료
+    elif non_correct == 0:
+        answer = min(answer, depth)
+        return
+
+    # 탈출 조건
+    if depth >= 3:
+        return
+
+    for i in range(x, height):
+        for j in range(line_cnt - 1):
+            if i == x and j <= y:  # 이번 x 줄인데 j가 지금보다 작거나 같은 경우
                 continue
-            if dy > 0 and ladder[dx][dy-1]: #왼쪽에 선이 있는 경우
+            if (j - 1 >= 0 and ladders[i][j - 1]) or (j + 1 < line_cnt - 1 and ladders[i][j + 1]) or ladders[i][j]:
+                # 양쪽에 사다리가 하나라도 있을 경우 -> 인접할 수 없다.
                 continue
-            if ladder[dx][dy] or ladder[dx][dy+1]: #해당 장소 혹은 오른쪽에 선이 있는 경우
-                continue
-            ladder[dx][dy] = 1
-            dfs(chance-1, dx, dy)
-            ladder[dx][dy] = 0
+            ladders[i][j] = 1
+            backtracking(i, j, depth + 1)
+            ladders[i][j] = 0
 
 
-N, M, H = map(int, input().split())
-ladder = [[0 for _ in range(N)] for _ in range(H)] #가로 N이고 세로 H인 사다리 만들기
-min_val = -1
-for _ in range(M):
-    a, b = map(int, input().split())
-    ladder[a-1][b-1] = 1 #ladder[x][y] 가 1이라면 y번째와 y+1번째의 세로선이 x+1번째 가로선에서 이어져 있다는 뜻
-for cnt in range(4):
-    dfs(cnt, 0, -1) #cnt: 새로운 라인의 개수, 백트래킹을 위한 x,y좌표
-    if min_val == -1: #그 전에서 아직 답이 나오지 않은 경우는 가능한 라인 개수를 늘린다.
-        continue
-    else:
-        break
-print(min_val)
+answer = 4
+
+line_cnt, hor_cnt, height = map(int, input().split())
+ladders = [[0 for _ in range(line_cnt - 1)] for _ in range(height)]
+
+for hor in range(hor_cnt):
+    a, b = map(lambda x: int(x) - 1, input().split())
+    ladders[a][b] = 1
+
+backtracking(0, -1, 0)
+
+if answer == 4:
+    print(-1)
+else:
+    print(answer)
