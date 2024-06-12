@@ -6,18 +6,21 @@
 -- 10101 : 21
 -- 11101 : 29
 
-#select RIGHT(CAST(CONV(genotype,10,2) AS CHAR),3)
 
-# select SUBSTRING(CONV(genotype,10,2),LENGTH(CONV(genotype,10,2))-1,1)
-# from ecoli_data
+# select count(*) AS COUNT
+# from (select CONV(genotype,10,2) as bingeno
+#         from ecoli_data ) as z
+# where (SUBSTRING(bingeno, LENGTH(bingeno)-1,1) = '0' or SUBSTRING(bingeno, LENGTH(bingeno)-1,1) = '')
+#     and (SUBSTRING(bingeno, LENGTH(bingeno),1) = '1' or SUBSTRING(bingeno, LENGTH(bingeno)-2,1) = '1')
 
-# SUBSTRING(bingeno, LENGTH(bingeno),1)
-
-select count(*) AS COUNT
-from (select CONV(genotype,10,2) as bingeno
-        from ecoli_data ) as z
-where (SUBSTRING(bingeno, LENGTH(bingeno)-1,1) = '0' or SUBSTRING(bingeno, LENGTH(bingeno)-1,1) = '')
-    and (SUBSTRING(bingeno, LENGTH(bingeno),1) = '1' or SUBSTRING(bingeno, LENGTH(bingeno)-2,1) = '1')
-        
+SELECT 
+    COUNT(*) AS COUNT
+FROM
+    ECOLI_DATA
+WHERE
+    (GENOTYPE & 2) = 0 # 2번 형질 보유하면 안됨
+    AND
+    (GENOTYPE & 5) > 0 # 1번 or 3번 형질 보유해야함.
+;
 
 
